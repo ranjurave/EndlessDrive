@@ -19,7 +19,6 @@ public class GameUI : MonoBehaviour {
         HUD.SetActive(false);
         restartMenu.SetActive(false);
         Time.timeScale = 0;
-        
     }
 
     public void UpdateUI(int demerits, float petrol, float distanceTravelled) {

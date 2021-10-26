@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovements : MonoBehaviour {
-    //[SerializeField] AudioClip carEngine;
     [SerializeField] AudioClip policeCry;
     [SerializeField] AudioClip petrolFill;
     [SerializeField] public float petrol = 100;
-    [SerializeField] AudioListener audioListener;
+    [SerializeField] public AudioListener audioListener;
 
     float fuelefficiency = 0.05f;
     float forwardSpeed = 10;
@@ -24,6 +23,11 @@ public class PlayerMovements : MonoBehaviour {
     Rigidbody rigidbody;
     AudioSource audioSource;
     GameUI gameUI;
+
+    private void Awake() {
+        audioListener.enabled = false;
+    }
+        
 
     private void Start() {
         audioSource = GetComponent<AudioSource>();
@@ -47,9 +51,8 @@ public class PlayerMovements : MonoBehaviour {
     }
 
     private void HandlePCInput() {
-        horizontalInput = Input.GetAxis("Horizontal");// New line
+        horizontalInput = Input.GetAxis("Horizontal");
         Vector3 horizontalMove = transform.right * horizontalInput * horizontalSpeed * Time.deltaTime; // New Line
-
         Vector3 forwardMove = transform.forward * forwardSpeed * Time.deltaTime;
         Vector3 carPosition = rigidbody.position + forwardMove + horizontalMove;
         rigidbody.MovePosition(new Vector3(Mathf.Clamp(carPosition.x, -3, 3), carPosition.y, carPosition.z));
