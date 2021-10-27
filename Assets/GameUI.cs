@@ -10,13 +10,13 @@ public class GameUI : MonoBehaviour {
     [SerializeField] TextMeshProUGUI kilometers;
     [SerializeField] Image petrolImage;
 
-    [SerializeField] GameObject MainMenu;
-    [SerializeField] GameObject HUD;
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject hud;
     [SerializeField] GameObject restartMenu;
 
     void Start() {
-        MainMenu.SetActive(true);
-        HUD.SetActive(false);
+        mainMenu.SetActive(true);
+        hud.SetActive(false);
         restartMenu.SetActive(false);
         Time.timeScale = 0;
     }
@@ -28,11 +28,9 @@ public class GameUI : MonoBehaviour {
     }
 
     public void GameBegin() {
+        this.CallWithDelay(StartGame, 0.1f);
         Time.timeScale = 1;
-        MainMenu.SetActive(false);
-        HUD.SetActive(true);
     }
-
     public void GameOverMenu() {
         restartMenu.SetActive(true);
         Time.timeScale = 0;
@@ -41,8 +39,12 @@ public class GameUI : MonoBehaviour {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }
-
     public void quitGame() {
         Application.Quit();
+    }
+    void StartGame() {
+        restartMenu.SetActive(false);
+        mainMenu.SetActive(false);
+        hud.SetActive(true);
     }
 }
