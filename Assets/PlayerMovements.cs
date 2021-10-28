@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayerMovements : MonoBehaviour {
     [SerializeField] AudioClip policeCry;
     [SerializeField] AudioClip petrolFill;
+    [SerializeField] AudioClip coinCollect;
     [SerializeField] public float petrol = 100;
+    [SerializeField] GameUI gameUI;
 
     float fuelefficiency = 0.05f;
     float forwardSpeed = 10;
@@ -22,7 +24,6 @@ public class PlayerMovements : MonoBehaviour {
     Touch touch;
     Rigidbody rigidbody;
     AudioSource audioSource;
-    GameUI gameUI;
 
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
@@ -115,7 +116,7 @@ public class PlayerMovements : MonoBehaviour {
     }
     public void Coin() {
         demerits -= 5;
-        audioSource.PlayOneShot(policeCry);
+        audioSource.PlayOneShot(coinCollect);
     }
 }
 

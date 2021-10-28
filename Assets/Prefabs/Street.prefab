@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1526099390596099825}
   - component: {fileID: 3824950702494349854}
   - component: {fileID: 3354666995432327153}
+  - component: {fileID: 8022924312331696573}
   m_Layer: 0
   m_Name: Street
   m_TagString: Untagged
@@ -88,6 +89,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c0589655ccbd447a8baa2237dd01d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8022924312331696573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8198783647394855356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5de94aa8c698e4289119f220d93667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RendererInfo: []
+  m_Lightmaps: []
+  m_LightmapsDir: []
+  m_ShadowMasks: []
+  m_LightInfo: []
 --- !u!1 &9126776042276457147
 GameObject:
   m_ObjectHideFlags: 0
