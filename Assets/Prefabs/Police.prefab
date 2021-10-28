@@ -870,7 +870,7 @@ GameObject:
   - component: {fileID: 1574339162738859417}
   - component: {fileID: -8394887964085278742}
   m_Layer: 0
-  m_Name: TT_demo_police
+  m_Name: Police
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

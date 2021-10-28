@@ -7,7 +7,6 @@ public class PlayerMovements : MonoBehaviour {
     [SerializeField] AudioClip policeCry;
     [SerializeField] AudioClip petrolFill;
     [SerializeField] public float petrol = 100;
-    //[SerializeField] public AudioListener audioListener;
 
     float fuelefficiency = 0.05f;
     float forwardSpeed = 10;
@@ -26,30 +25,28 @@ public class PlayerMovements : MonoBehaviour {
     GameUI gameUI;
 
     private void Awake() {
-        //audioListener.enabled = false;
         audioSource = GetComponent<AudioSource>();
-        //audioSource.enabled = false;
+        rigidbody = GetComponent<Rigidbody>();
     }
-        
+
 
     private void Start() {
-        rigidbody = GetComponent<Rigidbody>();
         gameUI = FindObjectOfType<GameUI>();
+        gameUI.StartGame();
     }
 
     void Update() {
         if (!GameOver()) {
             PlayAudio();
-            //audioListener.enabled = true;
             DistanceCheck();
-            HandleMobileInput();
-            //HandlePCInput();
+            if (Application.platform == RuntimePlatform.Android) { HandleMobileInput(); }
+            else { HandlePCInput(); }
+
             gameUI.UpdateUI(demerits, petrol, travelledDistance);
         }
         else {
-            //audioListener.enabled = false;
             audioSource.Stop();
-            gameUI.GameOverMenu();
+            gameUI.GameOverMenu(demerits, petrol, travelledDistance);
         }
     }
 
@@ -60,19 +57,24 @@ public class PlayerMovements : MonoBehaviour {
     }
 
     private void HandlePCInput() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
         horizontalInput = Input.GetAxis("Horizontal");
         Vector3 horizontalMove = transform.right * horizontalInput * horizontalPCSpeed * Time.deltaTime; // New Line
         Vector3 forwardMove = transform.forward * forwardSpeed * Time.deltaTime;
         Vector3 carPosition = rigidbody.position + forwardMove + horizontalMove;
         rigidbody.MovePosition(new Vector3(Mathf.Clamp(carPosition.x, -3, 3), carPosition.y, carPosition.z));
         petrol -= forwardSpeed * fuelefficiency * Time.deltaTime;
-
     }
 
     void HandleMobileInput() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
         if (Input.touchCount > 0) {
             touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Moved ) {
+            if (touch.phase == TouchPhase.Moved) {
                 horizontalInput = touch.deltaPosition.x * horizontalSpeed;
             }
             else {
@@ -87,7 +89,7 @@ public class PlayerMovements : MonoBehaviour {
     }
 
     bool GameOver() {
-        if (demerits >= 100 || petrol <= 0) {
+        if (demerits > 100 || petrol <= 0) {
             return true;
         }
         else {
@@ -109,6 +111,10 @@ public class PlayerMovements : MonoBehaviour {
     }
     public void Demerit() {
         demerits += 10;
+        audioSource.PlayOneShot(policeCry);
+    }
+    public void Coin() {
+        demerits -= 5;
         audioSource.PlayOneShot(policeCry);
     }
 }
