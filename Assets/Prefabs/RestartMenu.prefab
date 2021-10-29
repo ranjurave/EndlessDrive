@@ -671,7 +671,7 @@ RectTransform:
   m_GameObject: {fileID: 4083405705262427333}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2125, y: 1.3471315, z: 1}
   m_Children: []
   m_Father: {fileID: 5974368339587542913}
   m_RootOrder: 0
@@ -679,7 +679,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2.2915, y: -11.4577}
-  m_SizeDelta: {x: 858.2866, y: 1491.3916}
+  m_SizeDelta: {x: 850, y: 1480}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6906717945261676058
 CanvasRenderer:
@@ -702,7 +702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 0.5372549}
+  m_Color: {r: 0.38679248, g: 0.32543227, b: 0.26455146, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

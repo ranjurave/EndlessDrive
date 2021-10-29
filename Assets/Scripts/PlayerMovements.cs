@@ -10,7 +10,9 @@ public class PlayerMovements : MonoBehaviour {
     [SerializeField] public float petrol = 100;
     [SerializeField] GameUI gameUI;
 
-    float fuelefficiency = 0.05f;
+    //[SerializeField] 
+
+    float fuelefficiency = 0.2f;
     float forwardSpeed = 10;
     float horizontalSpeed = 0.01f;
     float horizontalPCSpeed = 10f;
@@ -47,6 +49,8 @@ public class PlayerMovements : MonoBehaviour {
         }
         else {
             audioSource.Stop();
+            if (demerits > 100) demerits = 100;
+            if (petrol < 0) petrol = 0;
             gameUI.GameOverMenu(demerits, petrol, travelledDistance);
         }
     }
@@ -90,7 +94,7 @@ public class PlayerMovements : MonoBehaviour {
     }
 
     bool GameOver() {
-        if (demerits > 100 || petrol <= 0) {
+        if (demerits >= 100 || petrol <= 0) {
             return true;
         }
         else {
@@ -119,4 +123,5 @@ public class PlayerMovements : MonoBehaviour {
         audioSource.PlayOneShot(coinCollect);
     }
 }
-
+//TODO you ran out of petrol
+//TODO you have 100 demerit points
