@@ -119,7 +119,8 @@ public class PlayerMovements : MonoBehaviour {
         audioSource.PlayOneShot(policeCry);
     }
     public void Coin() {
-        demerits -= 5;
+        demerits -= 20;
+        if (demerits < 0) { demerits = 0; }
         audioSource.PlayOneShot(coinCollect);
     }
 }
