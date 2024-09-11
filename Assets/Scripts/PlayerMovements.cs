@@ -2,16 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class PlayerMovements : MonoBehaviour {
     [SerializeField] AudioClip policeCry;
     [SerializeField] AudioClip petrolFill;
     [SerializeField] AudioClip coinCollect;
     [SerializeField] public float petrol = 100;
-    [SerializeField] GameUI gameUI;
-
-    //[SerializeField] 
-
+    [SerializeField] GameObject carBody;
+    [SerializeField] float test;
+    
     float fuelefficiency = 0.2f;
     float forwardSpeed = 10;
     float horizontalSpeed = 0.01f;
@@ -22,9 +22,11 @@ public class PlayerMovements : MonoBehaviour {
     public int demerits;
     public float travelledDistance;
     public bool gameBegin = true;
+    public Renderer carRenderer;
+    GameUI gameUI;
 
     Touch touch;
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
     AudioSource audioSource;
 
     private void Awake() {
@@ -34,24 +36,36 @@ public class PlayerMovements : MonoBehaviour {
 
 
     private void Start() {
-        gameUI = FindObjectOfType<GameUI>();
+        gameUI = FindFirstObjectByType<GameUI>();
         gameUI.StartGame();
+        carRenderer = carBody.GetComponent<Renderer>();
     }
 
     void Update() {
+        if (Input.GetKey(KeyCode.G)) {
+            carRenderer.material.EnableKeyword("_EMISSION");
+            carRenderer.material.SetColor("_EmissionColor", Color.black);
+        }
+
         if (!GameOver()) {
             PlayAudio();
             DistanceCheck();
             if (Application.platform == RuntimePlatform.Android) { HandleMobileInput(); }
             else { HandlePCInput(); }
-
             gameUI.UpdateUI(demerits, petrol, travelledDistance);
         }
         else {
+            string gameOverMessage = " ";
             audioSource.Stop();
-            if (demerits > 100) demerits = 100;
-            if (petrol < 0) petrol = 0;
-            gameUI.GameOverMenu(demerits, petrol, travelledDistance);
+            if (demerits >= 100) { 
+                demerits = 100;
+                gameOverMessage = "You got 100 Demerits !!!";
+            }
+            if (petrol <= 0) {
+                petrol = 0;
+                gameOverMessage = "You ran out of fuel !!!";
+            }
+            gameUI.GameOverMenu(demerits, petrol, travelledDistance, gameOverMessage);
         }
     }
 
@@ -123,6 +137,14 @@ public class PlayerMovements : MonoBehaviour {
         if (demerits < 0) { demerits = 0; }
         audioSource.PlayOneShot(coinCollect);
     }
+
+    public void ResetColour() {
+        StartCoroutine(DelayReset());
+    }
+
+    IEnumerator DelayReset() {
+        yield return new WaitForSeconds(0.2f);
+        carRenderer.material.EnableKeyword("_EMISSION");
+        carRenderer.material.SetColor("_EmissionColor", Color.black);
+    }
 }
-//TODO you ran out of petrol
-//TODO you have 100 demerit points

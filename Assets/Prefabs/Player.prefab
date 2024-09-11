@@ -327,10 +327,12 @@ MonoBehaviour:
   petrolFill: {fileID: 8300000, guid: b76ac102001c6284f987f90f693f89c7, type: 3}
   coinCollect: {fileID: 0}
   petrol: 50
-  gameUI: {fileID: 0}
+  carBody: {fileID: 7468265991909602262}
+  test: 0
   demerits: 0
   travelledDistance: 0
   gameBegin: 1
+  carRenderer: {fileID: 0}
 --- !u!54 &6512078553113807014
 Rigidbody:
   m_ObjectHideFlags: 0

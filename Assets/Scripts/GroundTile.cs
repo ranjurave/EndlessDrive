@@ -6,7 +6,7 @@ public class GroundTile : MonoBehaviour {
     GroundSpawner groundSpawner;
 
     void Start() {
-        groundSpawner = FindObjectOfType<GroundSpawner>();
+        groundSpawner = FindFirstObjectByType<GroundSpawner>();
     }
 
     private void OnTriggerExit(Collider other) {

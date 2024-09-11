@@ -12,6 +12,8 @@ public class GameUI : MonoBehaviour {
     [SerializeField] TextMeshProUGUI kilometersCovered;
     [SerializeField] TextMeshProUGUI demeritsGot;
     [SerializeField] TextMeshProUGUI petrolLeft;
+    [SerializeField] TextMeshProUGUI gameOverLabel;
+    [SerializeField] TextMeshProUGUI gameOverMessage;
 
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject hud;
@@ -27,8 +29,9 @@ public class GameUI : MonoBehaviour {
         petrolImage.fillAmount = petrol / 100;
         kilometers.text = "Distance Covered : " + (distanceTravelled / 100).ToString("F2");
     }
-    public void GameOverMenu(int demerits, float petrol, float distanceTravelled) {
+    public void GameOverMenu(int demerits, float petrol, float distanceTravelled, string gameMessage) {
         restartMenu.SetActive(true);
+        gameOverMessage.text = gameMessage;
         demeritsGot.text = "Demerit Points : " + demerits.ToString();
         kilometersCovered.text = "Distance covered : " + distanceTravelled.ToString("F2");
         petrolLeft.text = "Petrol left : " + petrol.ToString("F2");
